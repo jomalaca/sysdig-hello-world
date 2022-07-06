@@ -68,16 +68,57 @@ func defaultPage(w http.ResponseWriter, req *http.Request) {
 <!DOCTYPE html>
 <html>
     <head>
+		<title>
         {{.Title}}
+		</title>
     </head>
+	<style>
+			nav {
+				background: #515151;
+				text-align: center;
+				font-family: Arial, Helvetica, sans-serif;
+				/* THIS IS OPTIONAL*/
+			}
+
+			h1, p {
+				font-family: Arial, Helvetica, sans-serif;
+			}
+
+			h1 {
+				color: #515151;
+			}
+
+			nav a {
+				display: inline-block;
+				color: #FFF;
+				padding: 18px 12px;
+				text-decoration: none;
+				transition: ease-in .3s;
+			}
+
+			nav a:hover {
+				color: #515151;
+				background: #FFF;
+			}
+
+			nav ul {
+				list-style-type: none;
+			}
+
+			nav ul li {
+				display: inline;
+			}
+		</style>
     <body>
-        <h3>Available links are:</h3>
+		<nav>
         <ul>
 			<li><a href="/">Home</a></li>
             {{range .Links}}
 				<li><a href="/{{.}}">{{.}}</a></li>
             {{end}}
         </ul>
+		</nav>
+		<h1>{{.Title}}</h1>
     </body>
 </html>
 `
