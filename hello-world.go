@@ -110,6 +110,7 @@ func defaultPage(w http.ResponseWriter, req *http.Request) {
 			}
 		</style>
     <body>
+		<img src="img/sysdig_Horz_Color_Logo_RGB_sml.jpg" alt="Sysdig Logo"/>
 		<nav>
         <ul>
 			<li><a href="/">Home</a></li>
