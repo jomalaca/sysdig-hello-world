@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 	"os"
 
@@ -18,6 +19,25 @@ func dk(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(w, "hello, dk!\n")
 }
 
+func defaultPage(w http.ResponseWriter, req *http.Request) {
+	myVar := "From the var!"
+	tmpl, err := template.ParseFiles("html/index.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	data := struct {
+		MyVar string
+	}{
+		MyVar: myVar,
+	}
+
+	err = tmpl.Execute(w, data)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
 func headers(w http.ResponseWriter, req *http.Request) {
 
 	for name, headers := range req.Header {
@@ -31,6 +51,7 @@ func main() {
 	var log = logrus.New()
 	log.Out = os.Stdout
 
+	http.HandleFunc("/", defaultPage)
 	http.HandleFunc("/hello", hello)
 	http.HandleFunc("/headers", headers)
 	http.HandleFunc("/dk", dk)
