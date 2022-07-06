@@ -8,7 +8,7 @@ COPY . .
 
 RUN go get
 # RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build hello-world.go
-RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -o hello-world
+RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -o /build/hello-world
 
 FROM scratch
 
