@@ -26,7 +26,7 @@ type MyData struct {
 
 func hello(w http.ResponseWriter, req *http.Request) {
 
-	// Create data - should centraize
+	// Create data - should centralize
 	helloData := MyData{
 		Title:         "Sysdig Hello World - Hello",
 		Homelinktxt:   "Home",
@@ -59,7 +59,7 @@ func hello(w http.ResponseWriter, req *http.Request) {
 
 func defaultPage(w http.ResponseWriter, req *http.Request) {
 
-	// Create data - should centraize
+	// Create data - should centralize
 	homeData := MyData{
 		Title:         "Sysdig Hello World - Home",
 		Homelinktxt:   "Home",
@@ -81,7 +81,7 @@ func defaultPage(w http.ResponseWriter, req *http.Request) {
 
 func headers(w http.ResponseWriter, req *http.Request) {
 
-	// Create data - should centraize
+	// Create data - should centralize
 	headerData := MyData{
 		Title:         "Sysdig Hello World - Headers",
 		Homelinktxt:   "Home",
@@ -123,7 +123,7 @@ func main() {
 	var log = logrus.New()
 	log.Out = os.Stdout
 
-	// Needed to serve static assests
+	// Needed to serve static assets
 	fs := http.FileServer(http.Dir("./img"))
 	http.Handle("/img/", http.StripPrefix("/img/", fs))
 
