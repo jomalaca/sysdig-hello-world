@@ -2,12 +2,17 @@ package main
 
 import (
 	"fmt"
-	"html"
 	"net/http"
 	"os"
+	"text/template"
 
 	"github.com/sirupsen/logrus"
 )
+
+type Context struct {
+	Title string
+	Links [2]string
+}
 
 // Data for HTML templates
 // type MyData struct {
@@ -59,10 +64,31 @@ func hello(w http.ResponseWriter, req *http.Request) {
 
 func defaultPage(w http.ResponseWriter, req *http.Request) {
 
-	unescaped := `<h1>Hi there! H1</h1>`
-	escaped := html.EscapeString(unescaped)
-	fmt.Fprintf(w, "%s\n", escaped)
+	const doc = `
+<!DOCTYPE html>
+<html>
+    <head>
+        {{.Title}}
+    </head>
+    <body>
+        <h3>Available links are:</h3>
+        <ul>
+			<li><a href="/">Home</a></li>
+            {{range .Links}}
+				<li><a href="/{{.}}">{{.}}</a></li>
+            {{end}}
+        </ul>
+    </body>
+</html>
+`
 
+	w.Header().Add("Content Type", "text/html")
+	templates, _ := template.New("doc").Parse(doc)
+	context := Context{
+		Title: "Sysdig Hello World - Home",
+		Links: [2]string{"headers", "hello"},
+	}
+	templates.Lookup("doc").Execute(w, context)
 	// Create data - should centralize
 	// homeData := MyData{
 	// 	Title:         "Sysdig Hello World - Home",
