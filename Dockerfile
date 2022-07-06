@@ -14,4 +14,4 @@ FROM scratch
 
 COPY --from=builder /build/hello-world /hello-world
 
-ENTRYPOINT ["/hello-world"]
+# ENTRYPOINT ["/hello-world"]
