@@ -86,8 +86,10 @@ func hello(w http.ResponseWriter, req *http.Request) {
         </ul>
 		</nav>
 		<h1>{{.Title}}</h1>
+		<p>
 		`
 	const footer = `
+	</p>
     </body>
 </html>
 `
@@ -240,8 +242,10 @@ func headers(w http.ResponseWriter, req *http.Request) {
         </ul>
 		</nav>
 		<h1>{{.Title}}</h1>
+		<p>
 		`
 	const footer = `
+	</p>
     </body>
 </html>
 `
