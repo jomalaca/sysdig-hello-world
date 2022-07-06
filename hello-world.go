@@ -2,10 +2,9 @@ package main
 
 import (
 	"fmt"
-	"log"
+	"html"
 	"net/http"
 	"os"
-	"text/template"
 
 	"github.com/sirupsen/logrus"
 )
@@ -37,28 +36,32 @@ func hello(w http.ResponseWriter, req *http.Request) {
 	// 	Headerlink:    "/headers",
 	// }
 
-	Title := "Sysdig Hello World - Home"
-	// Output html header
-	parsedTemplate, _ := template.ParseFiles("template-header.html")
-	err := parsedTemplate.Execute(w, Title)
-	if err != nil {
-		log.Println("Error executing template :", err)
-		return
-	}
+	// Title := "Sysdig Hello World - Home"
+	// // Output html header
+	// parsedTemplate, _ := template.ParseFiles("template-header.html")
+	// err := parsedTemplate.Execute(w, Title)
+	// if err != nil {
+	// 	log.Println("Error executing template :", err)
+	// 	return
+	// }
 
 	// data in the page
 	fmt.Fprintf(w, "Hi there!\n")
 
 	// Output html footer
-	parsedTemplate2, _ := template.ParseFiles("template-footer.html")
-	err2 := parsedTemplate2.Execute(w, nil)
-	if err != nil {
-		log.Println("Error executing template :", err2)
-		return
-	}
+	// parsedTemplate2, _ := template.ParseFiles("template-footer.html")
+	// err2 := parsedTemplate2.Execute(w, nil)
+	// if err != nil {
+	// 	log.Println("Error executing template :", err2)
+	// 	return
+	// }
 }
 
 func defaultPage(w http.ResponseWriter, req *http.Request) {
+
+	unescaped := `<h1>Hi there! H1</h1>`
+	escaped := html.EscapeString(unescaped)
+	fmt.Fprintf(w, "%s\n", escaped)
 
 	// Create data - should centralize
 	// homeData := MyData{
@@ -73,13 +76,13 @@ func defaultPage(w http.ResponseWriter, req *http.Request) {
 
 	// Output html for home
 
-	Title := "Sysdig Hello World - Home"
-	parsedTemplate, _ := template.ParseFiles("home-template.html")
-	err := parsedTemplate.Execute(w, Title)
-	if err != nil {
-		log.Println("Error executing template :", err)
-		return
-	}
+	// Title := "Sysdig Hello World - Home"
+	// parsedTemplate, _ := template.ParseFiles("home-template.html")
+	// err := parsedTemplate.Execute(w, Title)
+	// if err != nil {
+	// 	log.Println("Error executing template :", err)
+	// 	return
+	// }
 }
 
 func headers(w http.ResponseWriter, req *http.Request) {
