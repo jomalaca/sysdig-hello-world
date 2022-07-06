@@ -7,7 +7,7 @@ on:
 env:
   SYSDIG_URL: https://us2.app.sysdig.com
   REGISTRY: ghcr.io
-  IMAGE_NAME: "sysdig-hello-world"
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build:
