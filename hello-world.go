@@ -79,10 +79,6 @@ func defaultPage(w http.ResponseWriter, req *http.Request) {
 </div>
 </div>
 
-
-
-
-
 <!--===============================================================================================-->
 <script src="html/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -106,7 +102,7 @@ scale: 1.1
 	`
 
 	fmt.Fprint(w, AddHeader)
-	fmt.Fprintf(w, "%v: %v\n", name, h)
+	fmt.Fprintf(w, "hello, dk!\n")
 	fmt.Fprint(w, AddFooter)
 
 }
