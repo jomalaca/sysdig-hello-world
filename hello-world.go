@@ -1,32 +1,39 @@
 package main
 
 import (
-    "os"
-    "fmt"
-    "net/http"
-    "github.com/sirupsen/logrus"
+	"fmt"
+	"net/http"
+	"os"
+
+	"github.com/sirupsen/logrus"
 )
 
 func hello(w http.ResponseWriter, req *http.Request) {
 
-    fmt.Fprintf(w, "hello\n")
+	fmt.Fprintf(w, "hello\n")
+}
+
+func dk(w http.ResponseWriter, req *http.Request) {
+
+	fmt.Fprintf(w, "hello, dk!\n")
 }
 
 func headers(w http.ResponseWriter, req *http.Request) {
 
-    for name, headers := range req.Header {
-        for _, h := range headers {
-            fmt.Fprintf(w, "%v: %v\n", name, h)
-        }
-    }
+	for name, headers := range req.Header {
+		for _, h := range headers {
+			fmt.Fprintf(w, "%v: %v\n", name, h)
+		}
+	}
 }
 
 func main() {
-    var log = logrus.New()
-    log.Out = os.Stdout
+	var log = logrus.New()
+	log.Out = os.Stdout
 
-    http.HandleFunc("/hello", hello)
-    http.HandleFunc("/headers", headers)
+	http.HandleFunc("/hello", hello)
+	http.HandleFunc("/headers", headers)
+	http.HandleFunc("/dk", dk)
 
-    http.ListenAndServe(":8090", nil)
+	http.ListenAndServe(":8090", nil)
 }
