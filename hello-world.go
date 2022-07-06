@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
 	"os"
 
@@ -20,22 +19,14 @@ func dk(w http.ResponseWriter, req *http.Request) {
 }
 
 func defaultPage(w http.ResponseWriter, req *http.Request) {
-	myVar := "From the var!"
-	tmpl, err := template.ParseFiles("html/index.html")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
 
-	data := struct {
-		MyVar string
-	}{
-		MyVar: myVar,
-	}
+	// 	const AddHtml = `
 
-	err = tmpl.Execute(w, data)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
+	// `
+
+	// fmt.Fprint(w, AddHtml)
+	fmt.Fprintf(w, "Welcome!\n")
+	fmt.Fprintf(w, "Welcome!\n")
 }
 
 func headers(w http.ResponseWriter, req *http.Request) {
