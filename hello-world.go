@@ -30,36 +30,83 @@ type Context struct {
 
 func hello(w http.ResponseWriter, req *http.Request) {
 
-	// Create data - should centralize
-	// helloData := MyData{
-	// 	Title:         "Sysdig Hello World - Hello",
-	// 	Homelinktxt:   "Home",
-	// 	Homelink:      "/",
-	// 	Hellolinktxt:  "Hello",
-	// 	Hellolink:     "/hello",
-	// 	Headerlinktxt: "Header",
-	// 	Headerlink:    "/headers",
-	// }
+	const header = `
+<!DOCTYPE html>
+<html>
+    <head>
+		<title>
+        {{.Title}}
+		</title>
+    </head>
+	<style>
+			nav {
+				background: #515151;
+				text-align: center;
+				font-family: Arial, Helvetica, sans-serif;
+				/* THIS IS OPTIONAL*/
+			}
 
-	// Title := "Sysdig Hello World - Home"
-	// // Output html header
-	// parsedTemplate, _ := template.ParseFiles("template-header.html")
-	// err := parsedTemplate.Execute(w, Title)
-	// if err != nil {
-	// 	log.Println("Error executing template :", err)
-	// 	return
-	// }
+			h1, p {
+				font-family: Arial, Helvetica, sans-serif;
+			}
 
+			h1 {
+				color: #515151;
+			}
+
+			nav a {
+				display: inline-block;
+				color: #FFF;
+				padding: 18px 12px;
+				text-decoration: none;
+				transition: ease-in .3s;
+			}
+
+			nav a:hover {
+				color: #515151;
+				background: #FFF;
+			}
+
+			nav ul {
+				list-style-type: none;
+			}
+
+			nav ul li {
+				display: inline;
+			}
+		</style>
+    <body>
+		<img src="img/sysdig_Horz_Color_Logo_RGB_sml.jpg" alt="Sysdig Logo"/>
+		<nav>
+        <ul>
+				<li><a href="/">Home</a></li>
+            {{range .Links}}
+				<li><a href="/{{.}}">{{.}}</a></li>
+            {{end}}
+        </ul>
+		</nav>
+		<h1>{{.Title}}</h1>
+		`
+	const footer = `
+    </body>
+</html>
+`
+
+	w.Header().Add("Content Type", "text/html")
+	templates, _ := template.New("header").Parse(header)
+	context := Context{
+		Title: "Sysdig Hello World - Home",
+		Links: [2]string{"headers", "hello"},
+	}
+	templates.Lookup("header").Execute(w, context)
+
+	// data in the page - output html headers
 	// data in the page
 	fmt.Fprintf(w, "Hi there!\n")
 
-	// Output html footer
-	// parsedTemplate2, _ := template.ParseFiles("template-footer.html")
-	// err2 := parsedTemplate2.Execute(w, nil)
-	// if err != nil {
-	// 	log.Println("Error executing template :", err2)
-	// 	return
-	// }
+	templates2, _ := template.New("footer").Parse(footer)
+
+	templates2.Lookup("footer").Execute(w, nil)
 }
 
 func defaultPage(w http.ResponseWriter, req *http.Request) {
