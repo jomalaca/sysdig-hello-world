@@ -1,6 +1,9 @@
 #FROM golang:1.18-alpine as builder
 FROM golang:1.18.3-alpine as builder
 
+LABEL maintainer="dustin.krysak+maintainer@sysdig.com"
+
+
 RUN mkdir /build
 WORKDIR /build
 
