@@ -9,3 +9,5 @@ Sample Go app that runs a simple Golang webserver on port 8090 - Includes a thir
 ## Todo
 
 - add a failing build package
+
+Credit: Dustin K
