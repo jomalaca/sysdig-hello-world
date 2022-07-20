@@ -13,7 +13,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build hello-world.go
 FROM scratch
 
 LABEL maintainer="Sysdig CSE - dustin.krysak+maintainer@sysdig.com"
-# LABEL org.opencontainers.image.authors="dustin.krysak+maintainer@sysdig.com"
+LABEL org.opencontainers.image.authors="dustin.krysak+maintainer@sysdig.com"
 
 COPY --from=builder /build/hello-world /hello-world
 
