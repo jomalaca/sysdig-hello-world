@@ -2,6 +2,7 @@
 FROM golang:1.18.3-alpine as builder
 
 LABEL maintainer="Sysdig CSE - dustin.krysak+maintainer@sysdig.com"
+LABEL org.opencontainers.image.authors="dustin.krysak+maintainer@sysdig.com"
 
 
 RUN mkdir /build
