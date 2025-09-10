@@ -13,7 +13,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build hello-world.go
 FROM scratch
 
 LABEL maintainer="Dustin krysak"
-LABEL org.opencontainers.image.authors="Dustin krysak <dustin.krysak+maintainer@sysdig.com>"
+LABEL org.opencontainers.image.authors="Dustin Krysak <dustin.krysak+maintainer@sysdig.com>"
 LABEL status="testing"
 LABEL description="This toy container is used for testing pipleline scanning in Sysdig Secure."
 
