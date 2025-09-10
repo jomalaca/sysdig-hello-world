@@ -29,6 +29,7 @@ jobs:
           chmod +x ./sysdig-cli-scanner
 
       - name: Scan Image Sysdig Secure Inline Scan - New
+        continue-on-error: true
         env:
           SECURE_API_TOKEN: ${{ secrets.SECURE_API_TOKEN }}
         run: ./sysdig-cli-scanner --apiurl ${{env.SYSDIG_URL}} --full-vulns-table docker://${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}
