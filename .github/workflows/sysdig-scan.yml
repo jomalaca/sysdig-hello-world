@@ -25,6 +25,7 @@ jobs:
         uses: sysdiglabs/scan-action@v6
         with:
           sysdig-secure-token: ${{ secrets.SECURE_API_TOKEN }}
+          image-tag: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
       - name: Log in to the Container registry
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
