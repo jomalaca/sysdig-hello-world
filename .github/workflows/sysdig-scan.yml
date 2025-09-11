@@ -24,6 +24,7 @@ jobs:
         id: scan
         uses: sysdiglabs/scan-action@v6
         with:
+          stop-on-failed-policy-eval: true
           sysdig-secure-url: https://us2.app.sysdig.com/
           sysdig-secure-token: ${{ secrets.SECURE_API_TOKEN }}
           image-tag: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
