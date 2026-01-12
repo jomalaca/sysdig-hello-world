@@ -1,5 +1,5 @@
 #FROM golang:1.18-alpine as builder
-FROM golang:1.25.5-alpine as builder
+FROM golang:1.25.5-alpine AS builder
 
 
 RUN mkdir /build
