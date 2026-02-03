@@ -1,4 +1,4 @@
-FROM golang:1.19 AS builder
+FROM ubuntu:22.04 AS builder
 #FROM golang:1.25.5-alpine AS builder
 
 
